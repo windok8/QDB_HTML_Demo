@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+li {
+    list-style: none;
+}
+
+.chart_out{
+    margin-top: 15px;
+    width: 100%;
+    height: 400px;
+}
+
+#chartByYear{
+    position: relative;
+    left: 0%;
+    float: left;
+    width: 45%;
+    height: 100%;
+}
+
+#year_data{
+    position: absolute;
+    left: 79%;
+    z-index: 9999;
+}
+
+#main,#chartYear{
+    width: 100%;
+    height: 100%;
+}
+
+#chartInYear{
+    position: relative;
+    left: 0%;
+    float: right;
+    width: 45%;
+    height: 100%;
+}
+

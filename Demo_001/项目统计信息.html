@@ -5,20 +5,44 @@
     <title>Title</title>
 </head>
 <body>
+<link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts.css">
+<link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts_m.css">
 <div id="desktopContent" class="panel panel-bordered CenterDIV Relative" style="margin-top: 10px; display: none; min-width: 100%;">
     <div class="panel-heading Relative">
-        <h3 class="panel-title">测试统计Demo</h3>
+        <h3 class="panel-title">项目统计信息</h3>
     </div>
-    <div class="panel-body" style="padding: 15px; padding-top: 5px;">
-        <div id="GridQuickFilterSummaryDIV"></div>
-        <$DataGrid$>
+    <div class="ActionAreaTitleDIV"><i></i>收入支出趋势</div>
+
+    <div class="chart_out">
+        <div id="chartByYear">
+            <select id="year_data"></select>
+            <div id="main" style="width: 600px;height:400px;"></div>
+        </div>
+
+        <div id="chartInYear">
+            <div id="chartYear" style="width: 600px; height: 400px;"></div>
+        </div>
     </div>
+
 </div>
 
 <div id="mobileContent" style="display: none;" style="width:100%; background-color: yellow;">
     <!-- 这是手机端的适配代码 -->
-    <h3>手机版测试统计</h3>
-    <div style="height: 100px; width: 100%; background-color: yellow;"></div>
+    <div class="panel-heading Relative" style="text-align: center">
+        <h3 class="panel-title">项目统计信息</h3>
+    </div>
+    <div class="ActionAreaTitleDIV"><i></i>收入支出趋势</div>
+
+    <div class="chart_out">
+        <div id="chartByYear_m">
+            <select id="year_data_m"></select>
+            <div id="main_m" style="width: 600px;height:400px;"></div>
+        </div>
+
+        <div id="chartInYear_m">
+            <div id="chartYear_m" style="width: 600px; height: 400px;"></div>
+        </div>
+    </div>
 
     <!-- 其他适配代码 -->
 </div>
