@@ -7,6 +7,9 @@
 <body>
 <link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts.css">
 <link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts_m.css">
+<script type="text/javascript" src="HighCharts/highcharts.js"></script>
+<script src="PageTemplateV5\global\js\jsTest\echarts.js"></script>
+
 <div id="desktopContent" class="panel panel-bordered CenterDIV Relative" style="margin-top: 10px; display: none; min-width: 100%;">
     <div class="panel-heading Relative">
         <h3 class="panel-title">项目统计信息</h3>
@@ -47,6 +50,7 @@
     <!-- 其他适配代码 -->
 </div>
 <script>
+    ProjectChartsClass.PageInit();
     // 检测设备类型
     function isMobileDevice() {
         return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
