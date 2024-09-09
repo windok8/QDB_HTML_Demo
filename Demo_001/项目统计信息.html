@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="desktopContent" class="panel panel-bordered CenterDIV Relative" style="margin-top: 10px; display: none; min-width: 100%;">
+    <div class="panel-heading Relative">
+        <h3 class="panel-title">测试统计Demo</h3>
+    </div>
+    <div class="panel-body" style="padding: 15px; padding-top: 5px;">
+        <div id="GridQuickFilterSummaryDIV"></div>
+        <$DataGrid$>
+    </div>
+</div>
+
+<div id="mobileContent" style="display: none;" style="width:100%; background-color: yellow;">
+    <!-- 这是手机端的适配代码 -->
+    <h3>手机版测试统计</h3>
+    <div style="height: 100px; width: 100%; background-color: yellow;"></div>
+
+    <!-- 其他适配代码 -->
+</div>
+<script>
+    // 检测设备类型
+    function isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+    }
+
+    // 立即执行设备类型判断
+    (function() {
+        if (isMobileDevice()) {
+            // 如果是移动设备，显示移动端内容并隐藏桌面端内容
+            document.getElementById("mobileContent").style.display = "block"; // 显示移动端内容
+            document.getElementById("desktopContent").style.display = "none"; // 隐藏桌面端内容
+            // 删除带有 class "PageLeftMenuTD" 的元素
+            var leftMenu = document.getElementsByClassName("PageLeftMenuTD");
+            while (leftMenu.length > 0) {
+                leftMenu[0].remove();  // 删除元素
+            }
+            var mainContainer = document.getElementsByClassName("main-container")[0];
+            if (mainContainer) {
+                mainContainer.style.left = "0px";  // 设置 left 为 0px
+            }
+        } else {
+            // 如果是桌面设备，显示桌面端内容并隐藏移动端内容
+            document.getElementById("desktopContent").style.display = "block"; // 显示桌面端内容
+            document.getElementById("mobileContent").style.display = "none"; // 隐藏移动端内容
+        }
+    })();
+</script>
+</body>
+</html>
