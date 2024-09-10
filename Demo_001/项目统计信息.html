@@ -6,30 +6,54 @@
 </head>
 <body>
 <link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts.css">
-<link rel="stylesheet" href="PageTemplateV5\global\css\cssTest\charts_m.css">
 <script type="text/javascript" src="HighCharts/highcharts.js"></script>
 <script src="PageTemplateV5\global\js\jsTest\echarts.js"></script>
+<script src="PageTemplateV5\global\js\jsTest\ProjectChartsClass.js"></script>
+<script src="PageTemplateV5\global\js\jsTest\ProjectChartsClassM.js"></script>
 
-<div id="desktopContent" class="panel panel-bordered CenterDIV Relative" style="margin-top: 10px; display: none; min-width: 100%;">
+<style>
+    #main_m, #chartYear_m {
+        width: 100%; /* 设置宽度为父元素的100% */
+        height: auto; /* 高度自动适应 */
+    }
+
+    #year_data_m {
+        float: right;
+        font-size: 10px;
+        margin-top: -40px;
+    }
+</style>
+
+<!-- = = = = = = = = = = = = = = = = = = = -->
+
+<div id="desktopContent" class="panel panel-bordered CenterDIV Relative"
+     style="margin-top: 10px; display: table; min-width: 100%;">
+    <!-- = = = = = = = = = = = = = = = = = = = -->
+
     <div class="panel-heading Relative">
         <h3 class="panel-title">项目统计信息</h3>
     </div>
+
+    <!-- = = = = = = = = = = = = = = = = = = = -->
+
     <div class="ActionAreaTitleDIV"><i></i>收入支出趋势</div>
 
+    <!-- = = = = = = = = = = = = = = = = = = = -->
     <div class="chart_out">
         <div id="chartByYear">
             <select id="year_data"></select>
-            <div id="main" style="width: 600px;height:400px;"></div>
+            <div id="main" style="width: 100%"></div>
         </div>
 
         <div id="chartInYear">
-            <div id="chartYear" style="width: 600px; height: 400px;"></div>
+            <div id="chartYear" style="width: 100%"></div>
         </div>
     </div>
 
-</div>
 
-<div id="mobileContent" style="display: none;" style="width:100%; background-color: yellow;">
+</div>
+<div id="mobiledesktopContent" class="panel panel-bordered CenterDIV Relative"
+     style="margin-top: 10px; display: none; min-width: 100%;">
     <!-- 这是手机端的适配代码 -->
     <div class="panel-heading Relative" style="text-align: center">
         <h3 class="panel-title">项目统计信息</h3>
@@ -39,44 +63,66 @@
     <div class="chart_out">
         <div id="chartByYear_m">
             <select id="year_data_m"></select>
-            <div id="main_m" style="width: 600px;height:400px;"></div>
+            <div id="main_m" style="width: 600px;height:300px;"></div>
         </div>
 
         <div id="chartInYear_m">
-            <div id="chartYear_m" style="width: 600px; height: 400px;"></div>
+            <div id="chartYear_m" style="width: 600px; height: 300px;"></div>
         </div>
     </div>
-
     <!-- 其他适配代码 -->
 </div>
 <script>
-    ProjectChartsClass.PageInit();
-    // 检测设备类型
-    function isMobileDevice() {
-        return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
-    }
 
-    // 立即执行设备类型判断
-    (function() {
-        if (isMobileDevice()) {
-            // 如果是移动设备，显示移动端内容并隐藏桌面端内容
-            document.getElementById("mobileContent").style.display = "block"; // 显示移动端内容
-            document.getElementById("desktopContent").style.display = "none"; // 隐藏桌面端内容
-            // 删除带有 class "PageLeftMenuTD" 的元素
-            var leftMenu = document.getElementsByClassName("PageLeftMenuTD");
-            while (leftMenu.length > 0) {
-                leftMenu[0].remove();  // 删除元素
+    window.onload = function () {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // 判断是否为移动设备
+        if (/android|ipad|iphone|ipod/i.test(userAgent)) {
+            console.log("访问者使用的是手机浏览器");
+            // 移除 desktopContent 这个 <div>
+            var desktopDiv = document.getElementById("desktopContent");
+            if (desktopDiv) {
+                desktopDiv.remove();
             }
-            var mainContainer = document.getElementsByClassName("main-container")[0];
-            if (mainContainer) {
-                mainContainer.style.left = "0px";  // 设置 left 为 0px
+            // 显示 mobiledesktopContent
+            var mobileDiv = document.getElementById("mobiledesktopContent");
+            if (mobileDiv) {
+                mobileDiv.style.display = "block";
             }
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.style.left = '0px';
+            // 这里可以执行手机浏览器的逻辑
+            ProjectChartsClassM.PageInit();
+            document.getElementById('main_m').style.transform = 'scale(0.65)';
+            document.getElementById('main_m').style.transformOrigin = 'top left';
+            document.getElementById('chartYear_m').style.transform = 'scale(0.65)';
+            document.getElementById('chartYear_m').style.transformOrigin = 'top left';
+            var elements = document.querySelectorAll('.hidden-xs-down');
+
+// 遍历每个元素并将其 display 设置为 block（或其他合适的显示值）
+            elements.forEach(function (element) {
+                element.setAttribute('style', 'display: block !important');
+            });
+
+
         } else {
-            // 如果是桌面设备，显示桌面端内容并隐藏移动端内容
-            document.getElementById("desktopContent").style.display = "block"; // 显示桌面端内容
-            document.getElementById("mobileContent").style.display = "none"; // 隐藏移动端内容
+            console.log("访问者使用的是电脑浏览器");
+            // 移除 mobiledesktopContent 这个 <div>
+            var mobileDiv = document.getElementById("mobiledesktopContent");
+            if (mobileDiv) {
+                mobileDiv.remove();
+            }
+            // 显示 desktopContent
+            var desktopDiv = document.getElementById("desktopContent");
+            if (desktopDiv) {
+                desktopDiv.style.display = "block";
+            }
+            ProjectChartsClass.PageInit();
+            // 这里可以执行电脑浏览器的逻辑
         }
-    })();
+    };
+
 </script>
 </body>
 </html>

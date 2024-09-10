@@ -11,13 +11,13 @@ li {
     list-style: none;
 }
 
-.chart_out{
+.chart_out .chart_out_m{
     margin-top: 15px;
     width: 100%;
     height: 400px;
 }
 
-#chartByYear{
+#chartByYear #chartByYear_m{
     position: relative;
     left: 0%;
     float: left;
@@ -25,18 +25,18 @@ li {
     height: 100%;
 }
 
-#year_data{
+#year_data #year_data_m{
     position: absolute;
     left: 79%;
     z-index: 9999;
 }
 
-#main,#chartYear{
+#main,#chartYear #main_m,#chartYear_m{
     width: 100%;
     height: 100%;
 }
 
-#chartInYear{
+#chartInYear #chartInYear_m{
     position: relative;
     left: 0%;
     float: right;
